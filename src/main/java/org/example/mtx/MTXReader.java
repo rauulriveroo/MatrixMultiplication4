@@ -16,23 +16,24 @@ public class MTXReader {
         int numRows = -1;
         int numCols = -1;
 
-        try {
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
+        try (Scanner scanner = new Scanner(new File(filePath))) {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
 
-                if (line.startsWith("%")) {
+                if (line.isEmpty() || line.startsWith("%")) {
+                    continue;
+                }
+
+                String[] elements = line.split("\\s+");
+                if (elements.length < 2) {
                     continue;
                 }
 
                 if (numRows == -1 || numCols == -1) {
-                    String[] sizeInfo = line.split("\\s+");
-                    numRows = Integer.parseInt(sizeInfo[0]);
-                    numCols = Integer.parseInt(sizeInfo[1]);
-                } else {
-                    String[] elements = line.split("\\s+");
+                    numRows = Integer.parseInt(elements[0]);
+                    numCols = Integer.parseInt(elements[1]);
+                } else if (elements.length >= 3) {
                     int i = Integer.parseInt(elements[0]) - 1;
                     int j = Integer.parseInt(elements[1]) - 1;
                     double value = Double.parseDouble(elements[2]);
@@ -40,9 +41,8 @@ public class MTXReader {
                 }
             }
 
-            scanner.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("File not found: " + filePath, e);
         }
 
         return new COOMatrix(numRows, numCols, cooElements);

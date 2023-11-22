@@ -38,9 +38,15 @@ public class DenseMatrix implements Matrix {
 
     @Override
     public String toString() {
-        return "DenseMatrix{" +
-                "values=" + Arrays.toString(values) +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("DenseMatrix{Size: ").append(size()).append(": ");
+
+        for (double[] row : values) {
+            stringBuilder.append(Arrays.toString(row)).append("; ");
+        }
+
+        stringBuilder.append("}");
+        return stringBuilder.toString();
     }
 }
 

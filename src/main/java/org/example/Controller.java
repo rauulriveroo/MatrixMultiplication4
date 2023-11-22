@@ -2,12 +2,10 @@ package org.example;
 
 import org.example.matrices.*;
 import org.example.mtx.MTXWriter;
-import org.example.operations.DenseMatrixMultiplication;
 import org.example.operations.SparseMatrixMultiplication;
 import org.example.mtx.MTXReader;
-import org.example.transformation.CCSMatrixBuilder;
-import org.example.transformation.CRSMatrixBuilder;
-import org.example.transformation.DenseMatrixBuilder;
+import org.example.operations.transformation.CCSMatrixBuilder;
+import org.example.operations.transformation.CRSMatrixBuilder;
 
 public class Controller {
 

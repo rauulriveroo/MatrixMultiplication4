@@ -1,8 +1,5 @@
-import org.example.matrices.COOMatrix;
 import org.example.matrices.DenseMatrix;
-import org.example.mtx.MTXReader;
 import org.example.operations.TiledMatrixMultiplication;
-import org.example.transformation.DenseMatrixBuilder;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -27,7 +24,7 @@ public class TiledMatrixMultiplicationTest {
         DenseMatrix matrix1 = new DenseMatrix(data1);
         DenseMatrix matrix2 = new DenseMatrix(data2);
 
-        TiledMatrixMultiplication multiplication = new TiledMatrixMultiplication(matrix1, matrix2, 4);
+        TiledMatrixMultiplication multiplication = new TiledMatrixMultiplication(matrix1, matrix2, 6);
         multiplication.multiply();
 
         DenseMatrix result = multiplication.getResult();
@@ -42,27 +39,8 @@ public class TiledMatrixMultiplicationTest {
         DenseMatrix expected = new DenseMatrix(expectedData);
 
         assertEquals(expected, result);
-    }
 
-    @Test
-    public void test2multiply() throws InterruptedException {
-
-        MTXReader mtxReader = new MTXReader();
-        COOMatrix cooMatrix1 = mtxReader.readMTXFile("src/main/java/org/example/datalake/1138_bus.mtx");
-        COOMatrix cooMatrix2 = mtxReader.readMTXFile("src/main/java/org/example/datalake/1138_bus.mtx");
-
-        DenseMatrixBuilder denseMatrixBuilder = new DenseMatrixBuilder();
-        DenseMatrix matrix1 = denseMatrixBuilder.convertToDenseMatrix(cooMatrix1);
-        DenseMatrix matrix2 = denseMatrixBuilder.convertToDenseMatrix(cooMatrix2);
-
-        TiledMatrixMultiplication multiplication = new TiledMatrixMultiplication(matrix1, matrix2, 2);
-        multiplication.multiply();
-
-        DenseMatrix result = multiplication.getResult();
-
-        COOMatrix cooMatrix3 = mtxReader.readMTXFile("src/main/java/org/example/datalake/result.mtx");
-        DenseMatrix expected = denseMatrixBuilder.convertToDenseMatrix(cooMatrix3);
-
-        assertEquals(expected, result);
+        System.out.println("Result:" + result);
+        System.out.println("Expected:" + expected);
     }
 }

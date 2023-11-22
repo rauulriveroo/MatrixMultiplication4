@@ -1,4 +1,4 @@
-package org.example.transformation;
+package org.example.operations.transformation;
 
 import org.example.matrices.CCSMatrix;
 import org.example.matrices.COOMatrix;

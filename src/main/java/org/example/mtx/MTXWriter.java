@@ -12,7 +12,7 @@ public class MTXWriter {
     public void writeToMTXFile(COOMatrix matrix, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Coordinate coordinate : matrix.getCoordinates()) {
-                writer.write(coordinate.i() + " " + coordinate.j() + " " + coordinate.value());
+                writer.write((coordinate.i() +1) + " " + (coordinate.j()+1) + " " + coordinate.value());
                 writer.newLine();
             }
         } catch (IOException e) {
