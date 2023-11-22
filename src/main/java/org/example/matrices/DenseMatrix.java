@@ -1,7 +1,5 @@
 package org.example.matrices;
 
-import org.example.Matrix;
-
 import java.util.Arrays;
 
 public class DenseMatrix implements Matrix {
@@ -16,17 +14,33 @@ public class DenseMatrix implements Matrix {
         return values.length;
     }
 
+    public double[][] getValues() {
+        return values;
+    }
+
     @Override
     public double get(int i, int j) {
         return values[i][j];
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        DenseMatrix that = (DenseMatrix) obj;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DenseMatrix that = (DenseMatrix) o;
         return Arrays.deepEquals(values, that.values);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(values);
+    }
+
+    @Override
+    public String toString() {
+        return "DenseMatrix{" +
+                "values=" + Arrays.toString(values) +
+                '}';
     }
 }
 

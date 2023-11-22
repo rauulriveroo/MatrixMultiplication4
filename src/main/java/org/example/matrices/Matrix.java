@@ -1,4 +1,4 @@
-package org.example;
+package org.example.matrices;
 
 public interface Matrix {
     int size();

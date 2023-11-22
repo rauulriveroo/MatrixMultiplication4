@@ -1,4 +1,4 @@
-package org.example.reader;
+package org.example.mtx;
 
 import org.example.matrices.Coordinate;
 import org.example.matrices.COOMatrix;

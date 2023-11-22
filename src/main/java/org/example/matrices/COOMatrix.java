@@ -1,6 +1,7 @@
 package org.example.matrices;
 
 import java.util.List;
+import java.util.Objects;
 
 public class COOMatrix extends SparseMatrix {
     public final int numRows;
@@ -39,4 +40,21 @@ public class COOMatrix extends SparseMatrix {
                 .map(Coordinate::value)
                 .orElse(0.0);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        COOMatrix that = (COOMatrix) o;
+        if (numRows != that.numRows || numCols != that.numCols || coordinates.size() != that.coordinates.size()) {
+            return false;
+        }
+        for (int i = 0; i < coordinates.size(); i++) {
+            if (Double.compare(coordinates.get(i).value(), that.coordinates.get(i).value()) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

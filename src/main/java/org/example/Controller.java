@@ -1,9 +1,10 @@
 package org.example;
 
 import org.example.matrices.*;
+import org.example.mtx.MTXWriter;
 import org.example.operations.DenseMatrixMultiplication;
 import org.example.operations.SparseMatrixMultiplication;
-import org.example.reader.MTXReader;
+import org.example.mtx.MTXReader;
 import org.example.transformation.CCSMatrixBuilder;
 import org.example.transformation.CRSMatrixBuilder;
 import org.example.transformation.DenseMatrixBuilder;
@@ -29,13 +30,13 @@ public class Controller {
         long sparseStartTime = System.currentTimeMillis();
 
         SparseMatrixMultiplication cmm = new SparseMatrixMultiplication();
-        cmm.multiply(crs, ccs);
+        COOMatrix result = cmm.multiply(crs, ccs);
 
         long sparseEndTime = System.currentTimeMillis();
         long sparseExecTime = sparseEndTime - sparseStartTime;
         System.out.println("Sparse matrix execution time: " + sparseExecTime + " ms");
 
-        DenseMatrixBuilder denseMatrixBuilder = new DenseMatrixBuilder();
+        /*DenseMatrixBuilder denseMatrixBuilder = new DenseMatrixBuilder();
         DenseMatrix a = denseMatrixBuilder.convertToDenseMatrix(cooMatrix);
 
 
@@ -46,7 +47,7 @@ public class Controller {
 
         long denseEndTime = System.currentTimeMillis();
         long denseExecTime = denseEndTime - denseStartTime;
-        System.out.println("Dense matrix execution time: " + denseExecTime + " ms");
+        System.out.println("Dense matrix execution time: " + denseExecTime + " ms");*/
     }
 
 }
