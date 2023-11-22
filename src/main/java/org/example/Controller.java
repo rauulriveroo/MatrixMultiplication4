@@ -29,8 +29,12 @@ public class Controller {
 
         long sparseStartTime = System.currentTimeMillis();
 
-        SparseMatrixMultiplication cmm = new SparseMatrixMultiplication();
-        COOMatrix result = cmm.multiply(crs, ccs);
+        SparseMatrixMultiplication cmm = new SparseMatrixMultiplication(crs, ccs);
+        cmm.multiply();
+        COOMatrix result = cmm.getResult();
+
+        MTXWriter mtxWriter = new MTXWriter();
+        mtxWriter.writeToMTXFile(result, "src/main/java/org/example/datalake/result.mtx");
 
         long sparseEndTime = System.currentTimeMillis();
         long sparseExecTime = sparseEndTime - sparseStartTime;
@@ -42,8 +46,10 @@ public class Controller {
 
         long denseStartTime = System.currentTimeMillis();
 
-        DenseMatrixMultiplication denseMatrixMultiplication = new DenseMatrixMultiplication();
-        denseMatrixMultiplication.multiply(a, a);
+        DenseMatrixMultiplication denseMatrixMultiplication = new DenseMatrixMultiplication(a,a);
+        denseMatrixMultiplication.multiply();
+        DenseMatrix result = denseMatrixMultiplication.getResult();
+
 
         long denseEndTime = System.currentTimeMillis();
         long denseExecTime = denseEndTime - denseStartTime;

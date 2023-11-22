@@ -1,6 +1,8 @@
 package org.example.operations;
 
-public interface MatrixMultiplication {
+import org.example.matrices.Matrix;
 
-    public void multiply() throws Exception;
+public interface MatrixMultiplication {
+    void multiply() throws Exception;
+    Matrix getResult();
 }

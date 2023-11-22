@@ -13,8 +13,8 @@ public class MTXReader {
 
     public COOMatrix readMTXFile(String filePath) {
         List<Coordinate> cooElements = new ArrayList<>();
-        int numRows = -1; // Número de filas
-        int numCols = -1; // Número de columnas
+        int numRows = -1;
+        int numCols = -1;
 
         try {
             File file = new File(filePath);
@@ -23,12 +23,10 @@ public class MTXReader {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
 
-                // Ignorar líneas de comentarios marcadas con %
                 if (line.startsWith("%")) {
                     continue;
                 }
 
-                // Leer las coordenadas COO y el tamaño de la matriz
                 if (numRows == -1 || numCols == -1) {
                     String[] sizeInfo = line.split("\\s+");
                     numRows = Integer.parseInt(sizeInfo[0]);

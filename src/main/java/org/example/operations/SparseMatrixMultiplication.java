@@ -8,15 +8,26 @@ import org.example.matrices.COOMatrix;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SparseMatrixMultiplication {
-    public COOMatrix multiply(CRSMatrix matrixA, CCSMatrix matrixB) {
-        double[] valA = matrixA.getValues();
-        int[] colA = matrixA.getColIndices();
-        int[] rowPtrA = matrixA.getRowPtr();
+public class SparseMatrixMultiplication implements MatrixMultiplication {
 
-        double[] valB = matrixB.getValues();
-        int[] rowB = matrixB.getRowIndices();
-        int[] colPtrB = matrixB.getColPtr();
+    private CRSMatrix a;
+    private CCSMatrix b;
+    private COOMatrix c;
+
+    public SparseMatrixMultiplication(CRSMatrix a, CCSMatrix b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    @Override
+    public void multiply() {
+        double[] valA = a.getValues();
+        int[] colA = a.getColIndices();
+        int[] rowPtrA = a.getRowPtr();
+
+        double[] valB = b.getValues();
+        int[] rowB = b.getRowIndices();
+        int[] colPtrB = b.getColPtr();
 
         int numRowsA = rowPtrA.length - 1;
         int numColsB = colPtrB.length - 1;
@@ -51,6 +62,10 @@ public class SparseMatrixMultiplication {
             }
         }
 
-        return new COOMatrix(numRowsA,numColsB,resultCOO);
+        this.c = new COOMatrix(numRowsA, numColsB, resultCOO);
+    }
+
+    public COOMatrix getResult() {
+        return c;
     }
 }

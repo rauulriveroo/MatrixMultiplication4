@@ -2,8 +2,19 @@ package org.example.operations;
 
 import org.example.matrices.DenseMatrix;
 
-public class DenseMatrixMultiplication {
-    public DenseMatrix multiply(DenseMatrix a, DenseMatrix b) {
+public class DenseMatrixMultiplication implements MatrixMultiplication {
+
+    private DenseMatrix a;
+    private DenseMatrix b;
+    private DenseMatrix c;
+
+    public DenseMatrixMultiplication(DenseMatrix a, DenseMatrix b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    @Override
+    public void multiply() {
         if (a.size() != b.size()) {
             throw new IllegalArgumentException("Cannot multiply matrices: number of columns of A must match number of rows of B.");
         }
@@ -19,6 +30,11 @@ public class DenseMatrixMultiplication {
             }
         }
 
-        return new DenseMatrix(result);
+        this.c = new DenseMatrix(result);
+
+    }
+
+    public DenseMatrix getResult() {
+        return c;
     }
 }
