@@ -45,7 +45,6 @@ public class SparseMatrixMultiplication {
                     }
                 }
 
-                // Si la suma no es cero, añadir el elemento a COO
                 if (sum != 0) {
                     resultCOO.add(new Coordinate(i, j, sum));
                 }
