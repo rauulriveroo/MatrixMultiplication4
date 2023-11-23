@@ -1,6 +1,7 @@
 package org.example.matrices;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class CRSMatrix extends SparseMatrix{
 
@@ -45,18 +46,29 @@ public class CRSMatrix extends SparseMatrix{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CRSMatrix that = (CRSMatrix) o;
-        return Arrays.equals(values, that.values) &&
-                Arrays.equals(colIndices, that.colIndices) &&
-                Arrays.equals(rowPtr, that.rowPtr);
+        if (!(o instanceof CRSMatrix)) return false;
+        CRSMatrix crsMatrix = (CRSMatrix) o;
+        return Arrays.equals(values, crsMatrix.values) &&
+                Arrays.equals(colIndices, crsMatrix.colIndices) &&
+                Arrays.equals(rowPtr, crsMatrix.rowPtr);
     }
 
     @Override
     public int hashCode() {
-        int result = Arrays.hashCode(values);
+        int result = Objects.hash(values, colIndices, rowPtr);
+        result = 31 * result + Arrays.hashCode(values);
         result = 31 * result + Arrays.hashCode(colIndices);
         result = 31 * result + Arrays.hashCode(rowPtr);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "CRSMatrix{" +
+                "values=" + Arrays.toString(values) +
+                ", colIndices=" + Arrays.toString(colIndices) +
+                ", rowPtr=" + Arrays.toString(rowPtr) +
+                '}';
+    }
+
 }

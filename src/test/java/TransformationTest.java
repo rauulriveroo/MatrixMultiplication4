@@ -2,6 +2,7 @@ import org.example.matrices.*;
 import org.example.operations.transformation.CCSMatrixBuilder;
 import org.example.operations.transformation.CRSMatrixBuilder;
 import org.example.operations.transformation.DenseMatrixBuilder;
+import org.example.operations.transformation.MatrixTransformation;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -22,10 +23,10 @@ public class TransformationTest {
                 new Coordinate(3, 0, 5),
                 new Coordinate(3, 3, 4)
         );
-        COOMatrix cooMatrix = new COOMatrix(3, 3, coordinates);
+        COOMatrix cooMatrix = new COOMatrix(4, 4, coordinates);
 
-        CRSMatrixBuilder crsMatrixBuilder = new CRSMatrixBuilder();
-        CRSMatrix crsMatrix = crsMatrixBuilder.convertToCRS(cooMatrix);
+        MatrixTransformation<CRSMatrix> crsMatrixBuilder = new CRSMatrixBuilder();
+        CRSMatrix crsMatrix = crsMatrixBuilder.transform(cooMatrix);
 
         CRSMatrix expected = new CRSMatrix(
                 new double[]{1, 6, 2, 7, 3, 5, 4},
@@ -47,10 +48,10 @@ public class TransformationTest {
                 new Coordinate(3, 0, 5),
                 new Coordinate(3, 3, 4)
         );
-        COOMatrix cooMatrix = new COOMatrix(3, 3, coordinates);
+        COOMatrix cooMatrix = new COOMatrix(4, 4, coordinates);
 
-        CCSMatrixBuilder ccsMatrixBuilder = new CCSMatrixBuilder();
-        CCSMatrix ccsMatrix = ccsMatrixBuilder.convertToCCS(cooMatrix);
+        MatrixTransformation<CCSMatrix> ccsMatrixBuilder = new CCSMatrixBuilder();
+        CCSMatrix ccsMatrix = ccsMatrixBuilder.transform(cooMatrix);
 
         CCSMatrix expected = new CCSMatrix(
                 new double[]{1, 5, 2, 6, 3, 7, 4},
@@ -72,10 +73,10 @@ public class TransformationTest {
                 new Coordinate(3, 0, 5),
                 new Coordinate(3, 3, 4)
         );
-        COOMatrix cooMatrix = new COOMatrix(3, 3, coordinates);
+        COOMatrix cooMatrix = new COOMatrix(4, 4, coordinates);
 
-        DenseMatrixBuilder denseMatrixBuilder = new DenseMatrixBuilder();
-        DenseMatrix result = denseMatrixBuilder.convertToDense(cooMatrix);
+        MatrixTransformation<DenseMatrix> denseMatrixBuilder = new DenseMatrixBuilder();
+        DenseMatrix result = denseMatrixBuilder.transform(cooMatrix);
 
         double[][] expectedData = {
                 {1, 0, 6, 0},

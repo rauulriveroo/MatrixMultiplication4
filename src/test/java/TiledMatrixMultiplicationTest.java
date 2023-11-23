@@ -3,6 +3,7 @@ import org.example.matrices.DenseMatrix;
 import org.example.mtx.MTXReader;
 import org.example.operations.TiledMatrixMultiplication;
 import org.example.operations.transformation.DenseMatrixBuilder;
+import org.example.operations.transformation.MatrixTransformation;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -42,9 +43,6 @@ public class TiledMatrixMultiplicationTest {
         DenseMatrix expected = new DenseMatrix(expectedData);
 
         assertEquals(expected, result);
-
-        System.out.println("Result:" + result);
-        System.out.println("Expected:" + expected);
     }
 
     @Test
@@ -87,9 +85,6 @@ public class TiledMatrixMultiplicationTest {
         DenseMatrix expected = new DenseMatrix(expectedData);
 
         assertEquals(expected, result);
-
-        System.out.println("Result:" + result);
-        System.out.println("Expected:" + expected);
     }
 
     @Test
@@ -98,20 +93,37 @@ public class TiledMatrixMultiplicationTest {
         MTXReader reader = new MTXReader();
         COOMatrix cooMatrix = reader.readMTXFile("src/main/java/org/example/datalake/1138_bus.mtx");
 
-        DenseMatrixBuilder denseMatrixBuilder = new DenseMatrixBuilder();
-        DenseMatrix denseMatrix = denseMatrixBuilder.convertToDense(cooMatrix);
+        MatrixTransformation<DenseMatrix> denseMatrixBuilder = new DenseMatrixBuilder();
+        DenseMatrix denseMatrix = denseMatrixBuilder.transform(cooMatrix);
 
-        TiledMatrixMultiplication tiledMatrixMultiplication = new TiledMatrixMultiplication(denseMatrix, denseMatrix,569);
+        TiledMatrixMultiplication tiledMatrixMultiplication = new TiledMatrixMultiplication(denseMatrix, denseMatrix,2);
         tiledMatrixMultiplication.multiply();
 
         DenseMatrix result = tiledMatrixMultiplication.getResult();
 
         COOMatrix cooMatrix1 = reader.readMTXFile("src/main/java/org/example/datalake/result.mtx");
-        DenseMatrix expected = denseMatrixBuilder.convertToDense(cooMatrix1);
+        DenseMatrix expected = denseMatrixBuilder.transform(cooMatrix1);
 
         assertEquals(expected, result);
+    }
 
-        System.out.println("Result:" + result);
-        System.out.println("Expected:" + expected);
+    @Test
+    public void test4Multiply() throws InterruptedException {
+
+        MTXReader reader = new MTXReader();
+        COOMatrix cooMatrix = reader.readMTXFile("src/main/java/org/example/datalake/mc2depi.mtx");
+
+        MatrixTransformation<DenseMatrix> denseMatrixBuilder = new DenseMatrixBuilder();
+        DenseMatrix denseMatrix = denseMatrixBuilder.transform(cooMatrix);
+
+        TiledMatrixMultiplication tiledMatrixMultiplication = new TiledMatrixMultiplication(denseMatrix, denseMatrix,36867);
+        tiledMatrixMultiplication.multiply();
+
+        DenseMatrix result = tiledMatrixMultiplication.getResult();
+
+        COOMatrix cooMatrix1 = reader.readMTXFile("src/main/java/org/example/datalake/result_mc2depi.mtx");
+        DenseMatrix expected = denseMatrixBuilder.transform(cooMatrix1);
+
+        assertEquals(expected, result);
     }
 }

@@ -3,6 +3,7 @@ import org.example.matrices.DenseMatrix;
 import org.example.mtx.MTXReader;
 import org.example.operations.DenseMatrixMultiplication;
 import org.example.operations.transformation.DenseMatrixBuilder;
+import org.example.operations.transformation.MatrixTransformation;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -98,8 +99,8 @@ public class DenseMatrixMultiplicationTest {
         MTXReader reader = new MTXReader();
         COOMatrix cooMatrix = reader.readMTXFile("src/main/java/org/example/datalake/1138_bus.mtx");
 
-        DenseMatrixBuilder denseMatrixBuilder = new DenseMatrixBuilder();
-        DenseMatrix denseMatrix = denseMatrixBuilder.convertToDense(cooMatrix);
+        MatrixTransformation<DenseMatrix> denseMatrixBuilder = new DenseMatrixBuilder();
+        DenseMatrix denseMatrix = denseMatrixBuilder.transform(cooMatrix);
 
         DenseMatrixMultiplication denseMatrixMultiplication = new DenseMatrixMultiplication(denseMatrix, denseMatrix);
         denseMatrixMultiplication.multiply();
@@ -107,7 +108,7 @@ public class DenseMatrixMultiplicationTest {
         DenseMatrix result = denseMatrixMultiplication.getResult();
 
         COOMatrix cooMatrix1 = reader.readMTXFile("src/main/java/org/example/datalake/result.mtx");
-        DenseMatrix expected = denseMatrixBuilder.convertToDense(cooMatrix1);
+        DenseMatrix expected = denseMatrixBuilder.transform(cooMatrix1);
 
         assertEquals(expected, result);
 

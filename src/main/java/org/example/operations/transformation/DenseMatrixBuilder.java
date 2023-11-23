@@ -6,9 +6,10 @@ import org.example.matrices.DenseMatrix;
 
 import java.util.List;
 
-public class DenseMatrixBuilder {
+public class DenseMatrixBuilder implements MatrixTransformation<DenseMatrix> {
 
-    public DenseMatrix convertToDense(COOMatrix cooMatrix) {
+    @Override
+    public DenseMatrix transform(COOMatrix cooMatrix) {
         int numRows = cooMatrix.getNumRows();
         int numCols = cooMatrix.getNumCols();
         List<Coordinate> coordinates = cooMatrix.getCoordinates();

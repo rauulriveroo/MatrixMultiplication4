@@ -7,9 +7,10 @@ import org.example.matrices.Coordinate;
 import java.util.Comparator;
 import java.util.List;
 
-public class CRSMatrixBuilder {
+public class CRSMatrixBuilder implements MatrixTransformation<CRSMatrix>{
 
-    public CRSMatrix convertToCRS(COOMatrix cooMatrix) {
+    @Override
+    public CRSMatrix transform(COOMatrix cooMatrix) {
         List<Coordinate> coordinates = cooMatrix.getCoordinates();
 
         coordinates.sort(Comparator.comparing(Coordinate::i).thenComparing(Coordinate::j));
