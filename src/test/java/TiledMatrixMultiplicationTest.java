@@ -96,7 +96,7 @@ public class TiledMatrixMultiplicationTest {
         MatrixTransformation<DenseMatrix> denseMatrixBuilder = new DenseMatrixBuilder();
         DenseMatrix denseMatrix = denseMatrixBuilder.transform(cooMatrix);
 
-        TiledMatrixMultiplication tiledMatrixMultiplication = new TiledMatrixMultiplication(denseMatrix, denseMatrix,2);
+        TiledMatrixMultiplication tiledMatrixMultiplication = new TiledMatrixMultiplication(denseMatrix, denseMatrix, 569);
         tiledMatrixMultiplication.multiply();
 
         DenseMatrix result = tiledMatrixMultiplication.getResult();
