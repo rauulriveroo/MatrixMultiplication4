@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DenseMatrixBuilder {
 
-    public DenseMatrix convertToDenseMatrix(COOMatrix cooMatrix) {
+    public DenseMatrix convertToDense(COOMatrix cooMatrix) {
         int numRows = cooMatrix.getNumRows();
         int numCols = cooMatrix.getNumCols();
         List<Coordinate> coordinates = cooMatrix.getCoordinates();

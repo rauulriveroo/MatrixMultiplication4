@@ -1,7 +1,7 @@
 package org.example.mtx;
 
-import org.example.matrices.Coordinate;
 import org.example.matrices.COOMatrix;
+import org.example.matrices.Coordinate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +42,7 @@ public class MTXReader {
             }
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found: " + filePath, e);
+            throw new RuntimeException("Archivo no encontrado: " + filePath, e);
         }
 
         return new COOMatrix(numRows, numCols, cooElements);
