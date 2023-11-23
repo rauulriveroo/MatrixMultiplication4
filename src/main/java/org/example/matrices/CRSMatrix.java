@@ -1,10 +1,13 @@
 package org.example.matrices;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class CRSMatrix extends SparseMatrix{
 
-    private double[] values; // Lista de valores no nulos en la matriz
-    private int[] colIndices; // Lista de índices de columna para cada valor no nulo
-    private int[] rowPtr; // Lista de punteros a filas
+    private double[] values;
+    private int[] colIndices;
+    private int[] rowPtr;
 
     public CRSMatrix(double[] values, int[] colIndices, int[] rowPtr) {
         this.values = values;
@@ -39,4 +42,33 @@ public class CRSMatrix extends SparseMatrix{
     public int[] getRowPtr() {
         return rowPtr;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CRSMatrix)) return false;
+        CRSMatrix crsMatrix = (CRSMatrix) o;
+        return Arrays.equals(values, crsMatrix.values) &&
+                Arrays.equals(colIndices, crsMatrix.colIndices) &&
+                Arrays.equals(rowPtr, crsMatrix.rowPtr);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(values, colIndices, rowPtr);
+        result = 31 * result + Arrays.hashCode(values);
+        result = 31 * result + Arrays.hashCode(colIndices);
+        result = 31 * result + Arrays.hashCode(rowPtr);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CRSMatrix{" +
+                "values=" + Arrays.toString(values) +
+                ", colIndices=" + Arrays.toString(colIndices) +
+                ", rowPtr=" + Arrays.toString(rowPtr) +
+                '}';
+    }
+
 }

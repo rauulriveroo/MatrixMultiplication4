@@ -1,15 +1,16 @@
 package org.example.operations.transformation;
 
-import org.example.matrices.CCSMatrix;
 import org.example.matrices.COOMatrix;
 import org.example.matrices.Coordinate;
+import org.example.matrices.CCSMatrix;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class CCSMatrixBuilder {
+public class CCSMatrixBuilder implements MatrixTransformation<CCSMatrix> {
 
-    public CCSMatrix convertToCCS(COOMatrix cooMatrix) {
+    @Override
+    public CCSMatrix transform(COOMatrix cooMatrix) {
         List<Coordinate> coordinates = cooMatrix.getCoordinates();
 
         coordinates.sort(Comparator.comparing(Coordinate::j).thenComparing(Coordinate::i));

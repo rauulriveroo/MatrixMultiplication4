@@ -1,5 +1,6 @@
 package org.example.matrices;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,8 +50,9 @@ public class COOMatrix extends SparseMatrix {
         if (numRows != that.numRows || numCols != that.numCols || coordinates.size() != that.coordinates.size()) {
             return false;
         }
-        for (int i = 0; i < coordinates.size(); i++) {
-            if (Double.compare(coordinates.get(i).value(), that.coordinates.get(i).value()) != 0) {
+        List<Coordinate> otherCoordinates = new ArrayList<>(that.coordinates);
+        for (Coordinate coordinate : coordinates) {
+            if (!otherCoordinates.remove(coordinate)) {
                 return false;
             }
         }

@@ -1,5 +1,8 @@
 package org.example.matrices;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class CCSMatrix extends SparseMatrix{
     private double[] values;
     private int[] rowIndices;
@@ -38,5 +41,33 @@ public class CCSMatrix extends SparseMatrix{
 
     public int[] getColPtr() {
         return colPtr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CCSMatrix ccsMatrix = (CCSMatrix) o;
+        return Arrays.equals(values, ccsMatrix.values) &&
+                Arrays.equals(rowIndices, ccsMatrix.rowIndices) &&
+                Arrays.equals(colPtr, ccsMatrix.colPtr);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(values, rowIndices, colPtr);
+        result = 31 * result + Arrays.hashCode(values);
+        result = 31 * result + Arrays.hashCode(rowIndices);
+        result = 31 * result + Arrays.hashCode(colPtr);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CCSMatrix{" +
+                "values=" + Arrays.toString(values) +
+                ", rowIndices=" + Arrays.toString(rowIndices) +
+                ", colPtr=" + Arrays.toString(colPtr) +
+                '}';
     }
 }
