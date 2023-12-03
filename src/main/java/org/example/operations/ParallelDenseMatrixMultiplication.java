@@ -6,14 +6,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class TiledMatrixMultiplication implements MatrixMultiplication {
+public class ParallelDenseMatrixMultiplication implements MatrixMultiplication {
 
     private DenseMatrix a;
     private DenseMatrix b;
     private DenseMatrix c;
     private int blockSize;
 
-    public TiledMatrixMultiplication(DenseMatrix a, DenseMatrix b, int blockSize) {
+    public ParallelDenseMatrixMultiplication(DenseMatrix a, DenseMatrix b, int blockSize) {
         if (a.size() % blockSize != 0 || b.size() % blockSize != 0) {
             throw new IllegalArgumentException("Matrix size must be divisible by block size");
         }

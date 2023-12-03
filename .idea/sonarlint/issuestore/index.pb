@@ -60,3 +60,9 @@ a
 Msrc/main/java/org/example/operations/transformation/MatrixTransformation.java,2\d\2dcd17aeab2bef1baef4da711b602580910eca20
 _
 /src/main/java/org/example/datalake/result_2.mtx,e\b\eb3b306a8b355d0b78f68ffb4ff8dfd84a8e6050
+>
+.gitattributes,2\4\24139dae656713ba861751fb2c2ac38839349a7a
+n
+>src/test/java/ParallelStreamDenseMatrixMultiplicationTest.java,2\f\2f5c666deed4d074f2d708cdf7d289db0ad9db2c
+Å
+Qsrc/main/java/org/example/operations/ParallelStreamDenseMatrixMultiplication.java,c\f\cfe70386b4d6986a8ab92fb7ca3eeff5e1d76c86

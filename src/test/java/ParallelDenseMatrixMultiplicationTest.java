@@ -1,13 +1,13 @@
 import org.example.matrices.COOMatrix;
 import org.example.matrices.DenseMatrix;
 import org.example.mtx.MTXReader;
-import org.example.operations.TiledMatrixMultiplication;
+import org.example.operations.ParallelDenseMatrixMultiplication;
 import org.example.operations.transformation.DenseMatrixBuilder;
 import org.example.operations.transformation.MatrixTransformation;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TiledMatrixMultiplicationTest {
+public class ParallelDenseMatrixMultiplicationTest {
 
     @Test
     public void testMultiply() throws InterruptedException {
@@ -28,7 +28,7 @@ public class TiledMatrixMultiplicationTest {
         DenseMatrix matrix1 = new DenseMatrix(data1);
         DenseMatrix matrix2 = new DenseMatrix(data2);
 
-        TiledMatrixMultiplication multiplication = new TiledMatrixMultiplication(matrix1, matrix2, 2);
+        ParallelDenseMatrixMultiplication multiplication = new ParallelDenseMatrixMultiplication(matrix1, matrix2, 2);
         multiplication.multiply();
 
         DenseMatrix result = multiplication.getResult();
@@ -68,7 +68,7 @@ public class TiledMatrixMultiplicationTest {
         DenseMatrix matrix1 = new DenseMatrix(data1);
         DenseMatrix matrix2 = new DenseMatrix(data2);
 
-        TiledMatrixMultiplication multiplication = new TiledMatrixMultiplication(matrix1, matrix2, 3);
+        ParallelDenseMatrixMultiplication multiplication = new ParallelDenseMatrixMultiplication(matrix1, matrix2, 3);
         multiplication.multiply();
 
         DenseMatrix result = multiplication.getResult();
@@ -96,10 +96,10 @@ public class TiledMatrixMultiplicationTest {
         MatrixTransformation<DenseMatrix> denseMatrixBuilder = new DenseMatrixBuilder();
         DenseMatrix denseMatrix = denseMatrixBuilder.transform(cooMatrix);
 
-        TiledMatrixMultiplication tiledMatrixMultiplication = new TiledMatrixMultiplication(denseMatrix, denseMatrix, 569);
-        tiledMatrixMultiplication.multiply();
+        ParallelDenseMatrixMultiplication parallelDenseMatrixMultiplication = new ParallelDenseMatrixMultiplication(denseMatrix, denseMatrix, 569);
+        parallelDenseMatrixMultiplication.multiply();
 
-        DenseMatrix result = tiledMatrixMultiplication.getResult();
+        DenseMatrix result = parallelDenseMatrixMultiplication.getResult();
 
         COOMatrix cooMatrix1 = reader.readMTXFile("src/main/java/org/example/datalake/result_2.mtx");
         DenseMatrix expected = denseMatrixBuilder.transform(cooMatrix1);
@@ -116,10 +116,10 @@ public class TiledMatrixMultiplicationTest {
         MatrixTransformation<DenseMatrix> denseMatrixBuilder = new DenseMatrixBuilder();
         DenseMatrix denseMatrix = denseMatrixBuilder.transform(cooMatrix);
 
-        TiledMatrixMultiplication tiledMatrixMultiplication = new TiledMatrixMultiplication(denseMatrix, denseMatrix,36867);
-        tiledMatrixMultiplication.multiply();
+        ParallelDenseMatrixMultiplication parallelDenseMatrixMultiplication = new ParallelDenseMatrixMultiplication(denseMatrix, denseMatrix,36867);
+        parallelDenseMatrixMultiplication.multiply();
 
-        DenseMatrix result = tiledMatrixMultiplication.getResult();
+        DenseMatrix result = parallelDenseMatrixMultiplication.getResult();
 
         COOMatrix cooMatrix1 = reader.readMTXFile("src/main/java/org/example/datalake/result_mc2depi.mtx");
         DenseMatrix expected = denseMatrixBuilder.transform(cooMatrix1);
