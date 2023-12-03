@@ -25,8 +25,8 @@ public class ParallelStreamDenseMatrixMultiplication implements MatrixMultiplica
         IntStream.range(0, size).parallel().forEach(i -> {
             int row;
             while ((row = rowCounter.getAndIncrement()) < size) {
-                for (int j = 0; j < size; j++) {
-                    for (int k = 0; k < size; k++) {
+                for (int k = 0; k < size; k++) {
+                    for (int j = 0; j < size; j++) {
                         c.getValues()[row][j] += a.getValues()[row][k] * b.getValues()[k][j];
                     }
                 }

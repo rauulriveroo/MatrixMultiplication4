@@ -47,8 +47,8 @@ public class ParallelDenseMatrixMultiplication implements MatrixMultiplication {
 
     private void multiplyBlock(int row, int col, int i2) {
         for (int i = row; i < Math.min(row + blockSize, a.size()); i++) {
-            for (int j = col; j < Math.min(col + blockSize, b.size()); j++) {
-                for (int k = i2; k < Math.min(i2 + blockSize, a.size()); k++) {
+            for (int k = i2; k < Math.min(i2 + blockSize, a.size()); k++) {
+                for (int j = col; j < Math.min(col + blockSize, b.size()); j++) {
                     c.getValues()[i][j] += a.getValues()[i][k] * b.getValues()[k][j];
                 }
             }
