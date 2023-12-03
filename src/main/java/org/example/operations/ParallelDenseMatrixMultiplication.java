@@ -14,15 +14,12 @@ public class ParallelDenseMatrixMultiplication implements MatrixMultiplication {
     private int blockSize;
 
     public ParallelDenseMatrixMultiplication(DenseMatrix a, DenseMatrix b, int blockSize) {
-        if (a.size() % blockSize != 0 || b.size() % blockSize != 0) {
-            throw new IllegalArgumentException("Matrix size must be divisible by block size");
-        }
         if (blockSize > a.size() || blockSize > b.size()) {
             throw new IllegalArgumentException("Block size must not be greater than matrix size");
         }
-        if (a.size() % blockSize != 0 || b.size() % blockSize != 0) {
+        /*if (a.size() % blockSize != 0 || b.size() % blockSize != 0) {
             throw new IllegalArgumentException("Matrix size must be divisible by block size. Matrix size: " + a.size() + ", " + b.size() + ". Block size: " + blockSize);
-        }
+        }*/
         this.a = a;
         this.b = b;
         this.blockSize = blockSize;
